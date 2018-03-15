@@ -4,7 +4,7 @@ import './Landing.css';
 
 class Landing extends React.Component {
   onButtonClick = () => {
-      this.props.onRouteChange('dashboard');
+      this.props.onRouteChange('Portal');
   }
 
   render(){

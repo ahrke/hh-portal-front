@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Landing from './components/landing/Landing';
-import Dashboard from './components/dashboard/Dashboard';
+import Portal from './components/portal/Portal';
 import Particles from 'react-particles-js';
 
 import particlesOptions from './misc/particleOptions';
@@ -28,7 +28,7 @@ class App extends Component {
 
         {(this.state.route === 'signin')
           ? <Landing onRouteChange={this.handleRouteChange} user={this.state.user} />
-          : <Dashboard onRouteChange={this.handleRouteChange} />
+          : <Portal onRouteChange={this.handleRouteChange} />
         }
       </div>
     );

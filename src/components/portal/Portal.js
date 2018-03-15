@@ -1,9 +1,11 @@
 import React from 'react';
 import NavBar from '../navigationBar/NavBar';
+import SideNav from '../navigationBar/SideNav';
+import WorkArea from '../workArea/WorkArea';
 
-import './Dashboard.css';
+import './Portal.css';
 
-class Dashboard extends React.Component {
+class Portal extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -27,15 +29,11 @@ class Dashboard extends React.Component {
     return (
       <div>
         <NavBar />
-        <div className="side-nav fixed" id='side-nav-custom'>
-          <header>
-            Hello
-          </header>
-        </div>
-        <h1>Dashboard</h1>
+        <SideNav />
+        <WorkArea />
       </div>
     )
   }
 }
 
-export default Dashboard;
+export default Portal;
