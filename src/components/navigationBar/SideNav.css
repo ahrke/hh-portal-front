@@ -1,4 +1,9 @@
 #side-nav-custom {
   margin-top: 64px;
-  padding-top: 64px;
+  padding-top: 5px;
+  background-color: rgba(238,238,238,0.3);
+}
+
+.collapsible {
+  background-color: rgba(238,238,238,0.7);
 }

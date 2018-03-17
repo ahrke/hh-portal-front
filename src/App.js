@@ -23,7 +23,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App grey-text text-lighten-2">
         <Particles className='particles' params={particlesOptions.options} />
 
         {(this.state.route === 'signin')

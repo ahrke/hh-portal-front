@@ -12,7 +12,8 @@ class Portal extends React.Component {
       user: {
         id: '',
         role: ''
-      }
+      },
+      workAreaView: ''
     }
   }
 
@@ -25,12 +26,18 @@ class Portal extends React.Component {
     })
   }
 
+  handleWorkAreaView = (view) => {
+    this.setState({
+      workAreaView: view
+    })
+  }
+
   render() {
     return (
       <div>
         <NavBar />
-        <SideNav />
-        <WorkArea />
+        <SideNav changeWorkAreaView={this.handleWorkAreaView} />
+        <WorkArea simpleMessage="hello stranger" newView={this.state.workAreaView} />
       </div>
     )
   }
