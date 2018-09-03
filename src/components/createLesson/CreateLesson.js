@@ -1,16 +1,35 @@
 import React from 'react';
 import { Form, Input, Row } from 'react-materialize';
+import AddLessonItem from './AddLessonItem';
+import SampleLessonView from './SampleLessonView';
 
 class CreateLesson extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      message: 'bonjour'
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      message: 'hello worlds'
+    })
+  }
+
+  handleButtonAdd = () => {
+    this.setState({
+      message: 'wonderful news!'
+    })
+  }
+
   render() {
+    const message = this.state.message;
     return (
-      <div className="container">
-        <Row>
-          <Input s={6} label="Last Name" />
-          <Input s={12} label="disabled" defaultValue="I am not editable" disabled />
-          <Input type="password" label="password" s={12} />
-          <Input type="email" label="Email" s={12} />
-        </Row>
+      <div style={{marginTop:"100px"}}>
+          <SampleLessonView />
+              <h1>{message}</h1>
+          <AddLessonItem onButtonAdd={this.handleButtonAdd} />
       </div>
     )
   }

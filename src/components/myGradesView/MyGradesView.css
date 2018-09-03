@@ -1,0 +1,18 @@
+
+.tableHeader {
+  color: dodgerblue;
+}
+
+.tableStuff {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.tableLeft {
+  margin-left: 20px;
+}
+
+.tableRight {
+  margin-right: 200px;
+}

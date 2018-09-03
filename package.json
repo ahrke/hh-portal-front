@@ -2,13 +2,32 @@
   "name": "portal-front",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+    "/signin": {
+      "target": "http://localhost:3000"
+    },
+    "/updateGrade": {
+      "target": "http://localhost:3000"
+    }
+  },
   "dependencies": {
+    "ajv": "^6.5.2",
+    "ajv-keywords": "^3.2.0",
+    "aws-sdk": "^2.275.1",
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.0",
+    "bcryptjs": "^2.4.3",
     "materialize-css": "^0.100.2",
+    "node-gyp": "^3.7.0",
+    "node-pre-gyp": "^0.10.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-materialize": "^2.1.2",
+    "react-materialize": "^2.4.5",
     "react-particles-js": "^2.1.1",
-    "react-scripts": "1.1.1"
+    "react-redux": "^5.0.7",
+    "react-scripts": "^1.1.4",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

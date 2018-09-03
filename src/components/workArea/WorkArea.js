@@ -2,6 +2,12 @@ import React from 'react';
 import LessonView from '../lessonView/LessonView';
 import CreateCourse from '../createCourse/CreateCourse';
 import CreateLesson from '../createLesson/CreateLesson';
+import SampleTestView from '../SampleTestView/SampleTestView';
+import LessonTest from '../lessonTestView/LessonTest';
+import UpdateGrade from '../../containers/updateGrade/UpdateGrade';
+import MyGradesView from '../myGradesView/MyGradesView';
+import MyStudentsView from '../myStudentsView/MyStudentsView';
+import QuestionCreationMain from '../questionCreationForm/QuestionCreationMain';
 
 class WorkArea extends React.Component {
   constructor() {
@@ -12,9 +18,10 @@ class WorkArea extends React.Component {
         role: ''
       },
       simpleMessage: '',
-      currentView: ''
+      currentView: '',
+      lessonId: ''
     }
-  }
+  } 
 
   componentDidMount() {
     this.setState({
@@ -33,6 +40,20 @@ class WorkArea extends React.Component {
       case 'createLesson':
         return this.createLessonView();
         break;
+      case 'sampleTestView':
+        return this.sampleTestView();
+        break;
+      case 'lessonTestView':
+        return this.lessonTestView();
+        break;
+      case 'myGrades':
+        return this.myGradesView();
+        break;
+      case 'myStudentsView':
+        return this.myStudentsView();
+        break;
+      case 'blank':
+        return <div></div>
       default:
         return this.generalView();
     }
@@ -48,7 +69,7 @@ class WorkArea extends React.Component {
     const { simpleMessage } = this.state;
     return (
       <div>
-        <h1>Welcome...anonymous, what are we learning today?</h1>
+        <h1>Welcome...{this.props.user.name_first}, what are we learning today?</h1>
         <h1>{simpleMessage}</h1>
       </div>
     )
@@ -62,13 +83,85 @@ class WorkArea extends React.Component {
 
   createCourseView = () => {
     return (
-      <CreateCourse />
+      <QuestionCreationMain />
     )
   }
 
   lessonView = () => {
     return (
       <LessonView />
+    )
+  }
+
+  sampleTestView = () => {
+    return (
+      <SampleTestView />
+    )
+  }
+
+  lessonTestView = () => {
+    return (
+      <UpdateGrade user={this.props.user} lesson={this.props.currentLesson} />
+    )
+  }
+
+  myGradesView = () => {
+    return (
+      <MyGradesView user={this.props.user} />
+    )
+  }
+
+  myStudentsView = () => {
+    let studentsSample = [
+      {name_first:'moobear',account_name:'22021',grades:[
+        {
+          lesson_id:1,
+          grade: 10
+        },
+        {
+          lesson_id:2,
+          grade: 10
+        },
+        {
+          lesson_id:4,
+          grade: 8
+        }
+      ]},
+      {name_first:'callista',account_name:'32021',grades:[
+        {
+          lesson_id:2,
+          grade: 5
+        },
+        {
+          lesson_id:3,
+          grade: 10
+        },
+        {
+          lesson_id:4,
+          grade: 8
+        }
+      ]}
+    ];
+    let lessonsSample = [
+      {
+        lesson_id: 1,
+        lesson_name: 'toolbelt 101'
+      },
+      {
+        lesson_id: 2,
+        lesson_name: 'constable peery eyes'
+      },
+      {
+        lesson_id: 3,
+        lesson_name: 'windswept samurai'
+      },
+      {
+        lesson_id: 4,
+        lesson_name: 'who got the keys to ma beamaa'
+      },
+    ]
+    return (
+      <MyStudentsView user={this.props.user} />
     )
   }
 

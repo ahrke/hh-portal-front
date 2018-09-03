@@ -1,0 +1,15 @@
+.title {
+  color: pearl;
+}
+
+.q {
+  color: pearl;
+}
+
+.answers {
+  color: dimgrey;
+}
+
+.white-lighten {
+  background: rgba(110, 0, 205, 0.7);
+}

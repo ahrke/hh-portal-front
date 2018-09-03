@@ -1,0 +1,13 @@
+.question {
+  color: dodgerblue;
+}
+
+.componentBackground {
+  margin-top: -30px;
+  background-color: rgba(10,10,20,0.7);
+}
+
+.responseText {
+  color: aliceblue;
+  text-align: left;
+}

@@ -1,0 +1,18 @@
+.typeAdder {
+  background: #00cec9;
+  padding: 3% 7%;
+  border-radius: 15px;
+  margin: 2% 3%;
+}
+
+.labels {
+  color: white !important;
+}
+
+.qButtonSpread {
+  border-radius: 5px;
+  background-color: #fab1a0;
+  length: 700px;
+  padding: 3% 7%;
+  padding-bottom: 405px !important;
+}

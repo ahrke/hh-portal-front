@@ -1,0 +1,10 @@
+.lessonDetailBack {
+  background-color: #0984e3;
+  padding: 3% 7%;
+  border-radius: 15px;
+  margin: 2% 3%;
+}
+
+.labels {
+  color: white !important;
+}
