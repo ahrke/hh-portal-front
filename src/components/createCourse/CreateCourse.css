@@ -1,0 +1,18 @@
+.createCourse {
+  border-radius: 45px !important;
+  background-color: #54a0ff !important;
+  padding: 4%;
+  margin: 5% !important;
+}
+
+Input + label {
+  color: white !important;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+    color: #54a0ff !important;
+}
+
+.active {
+  color: white !important;
+}

@@ -1,6 +1,5 @@
 import React from 'react';
 import LessonView from '../lessonView/LessonView';
-import CreateCourse from '../createCourse/CreateCourse';
 import CreateLesson from '../createLesson/CreateLesson';
 import SampleTestView from '../SampleTestView/SampleTestView';
 import LessonTest from '../lessonTestView/LessonTest';
@@ -8,6 +7,10 @@ import UpdateGrade from '../../containers/updateGrade/UpdateGrade';
 import MyGradesView from '../myGradesView/MyGradesView';
 import MyStudentsView from '../myStudentsView/MyStudentsView';
 import QuestionCreationMain from '../questionCreationForm/QuestionCreationMain';
+
+import AddCourse from '../../containers/addNewCourse/AddCourse';
+import AddTopic from '../../containers/addNewTopic/AddTopic';
+import AddQuestion from '../../containers/addNewQuestion/AddQuestion';
 
 class WorkArea extends React.Component {
   constructor() {
@@ -21,7 +24,7 @@ class WorkArea extends React.Component {
       currentView: '',
       lessonId: ''
     }
-  } 
+  }
 
   componentDidMount() {
     this.setState({
@@ -36,6 +39,9 @@ class WorkArea extends React.Component {
         break;
       case 'createCourse':
         return this.createCourseView();
+        break;
+      case 'createTopic':
+        return this.createTopicView();
         break;
       case 'createLesson':
         return this.createLessonView();
@@ -77,13 +83,19 @@ class WorkArea extends React.Component {
 
   createLessonView = () => {
     return (
-      <CreateLesson />
+      <AddQuestion course_id={this.props.currentCourse} topic_id={this.props.currentTopic} />
+    )
+  }
+
+  createTopicView = () => {
+    return (
+      <AddTopic course_id={this.props.currentCourse} />
     )
   }
 
   createCourseView = () => {
     return (
-      <QuestionCreationMain />
+      <AddCourse account_name={this.props.user.account_name} />
     )
   }
 

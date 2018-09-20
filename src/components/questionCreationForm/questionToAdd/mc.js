@@ -4,65 +4,71 @@ import { Input, Row, Button } from 'react-materialize';
 import './qToAdd.css';
 
 class MC extends React.Component {
-  constructor() {
-    super();
+
+  submitQuestion = (e) => {
+    e.preventDefault();
+    let form = e.target;
+    let formE = (e) => form.elements[e].value;
+
+    if(!formE('group1')){
+      return alert("you need to select answer")
+    }
 
     let responses = [];
     for(let i = 0; i < 4;i++){
-      responses[i] = {}
+      responses[i] = formE(`response${i+1}`)
     }
+    console.log(responses);
 
-    this.state = {
-      question_text: '',
+    let question = {
+      question_type: 'MC',
+      question_text: formE('questionText'),
+      question_value: formE('questionValue'),
+      question_answer: parseInt(formE('group1')),
+
       responses: responses
     }
-  }
 
-  updateQuestionText = (e) => {
-    this.setState({
-      ...this.state,
-      question_text: e.target.value
-    })
-  }
-
-  updateResponses = (num, text) => {
-    const responses = this.state.responses;
-
-    responses[num].response_text = text.target.value;
-
-    this.setState({
-      ...this.state,
-      responses
-    })
+    console.log(question);
+    this.props.addQ(question);
   }
 
   mcBuilder = () => {
     return (
       <div>
-        <Input onChange={(e) => this.updateQuestionText(e)} s={12} label="Question to Ask" labelClassName="labels" />
+        <form onSubmit={this.submitQuestion}>
         <Row>
-          <Input name='group1' type='radio' className='rButt' value='0' onChange={(e) => console.log(e.target.value)} s={1} />
-          <Input placeholder="response 1" onChange={(e) => this.updateResponses(0,e)} s={11} />
+          <Input s={9} name='questionText' label="Question to Ask" labelClassName="labels" />
+          <Input s={3} name="questionValue" label="Value of question" labelClassName='labels' />
         </Row>
         <Row>
-          <Input name='group1' type='radio' className='rButt' value='1' onChange={(e) => console.log(e.target.value)} s={1} />
-          <Input placeholder="response 2" onChange={(e) => this.updateResponses(1,e)} s={11} />
+          <Input name='group1' type='radio' className='rButt' value='0' />
+          <Input placeholder="response 1" name='response1' s={11} />
         </Row>
         <Row>
-          <Input name='group1' type='radio' className='rButt' value='2' onChange={(e) => console.log(e.target.value)} s={1} />
-          <Input placeholder="response 3" onChange={(e) => this.updateResponses(2,e)} s={11} />
+          <Input name='group1' type='radio' className='rButt' value='1' />
+          <Input placeholder="response 2" name='response2' s={11} />
         </Row>
         <Row>
-          <Input name='group1' type='radio' className='rButt' value='3' onChange={(e) => console.log(e.target.value)} s={1} />
-          <Input placeholder="response 4" onChange={(e) => this.updateResponses(3,e)} s={11} />
+          <Input name='group1' type='radio' className='rButt' value='2' />
+          <Input placeholder="response 3" name='response3' s={11} />
         </Row>
-        <Button s={12} onClick={() => this.props.remove(this.props.id)} icon='do_not_disturb_on' className='red' />
+        <Row>
+          <Input name='group1' type='radio' className='rButt' value='3'/>
+          <Input placeholder="response 4" name='response4' s={11} />
+        </Row>
+        <Button s={2}
+          icon='add' large className='green butts'
+        />
+        <span s={2} > </span>
+        <Button s={2} onClick={() => this.props.remove()} icon='remove' large className='red butts' />
+      </form>
       </div>
     )
   }
 
   render() {
-    let { remove } = this.props;
+    let { remove, updateQuestion } = this.props;
     return (
       <div className='qToAdd'>
         <h4>This is a multiple choice question to be added</h4>

@@ -8,3 +8,9 @@
 .rButt {
   padding-top: 30px;
 }
+
+.butts {
+  border-radius: 50px !important;
+  margin: 0 10px;
+  padding: 0 1% !important;
+}

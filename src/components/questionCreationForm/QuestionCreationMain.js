@@ -4,6 +4,7 @@ import QuestionCreationLessonDetails from './QuestionCreationLessonDetails';
 import QuestionTypeAdder from './questionTypeAdder/QuestionTypeAdder';
 import QuestionToAdd from './questionToAdd/QuestionToAdd';
 import LessonSubmitComponent from './lessonSubmitComponent/LessonSubmitComponent';
+import LessonDetails from './LessonDetails';
 
 window.id = 0;
 
@@ -13,8 +14,20 @@ class QuestionCreationMain extends React.Component {
     this.state = {
       data: [],
       lItem: 1,
-      lesson: {}
+      step: 1
     }
+  }
+
+  handleAddQ = (q) => {
+    let qHere = q;
+    qHere.id = window.id++;
+    this.state.data.push(qHere)
+    this.setState({
+      ...this.state,
+      data: this.state.data,
+      lItem: 0
+    })
+    console.log(this.state)
   }
 
   handleAddQuestionType = (type) => {
@@ -30,64 +43,70 @@ class QuestionCreationMain extends React.Component {
         lItem: '2'
       })
     }
-    this.state.data.push(newQuestion);
-    this.setState({
-      data: this.state.data
-    })
 
     console.log("the current state is...",this.state)
   }
 
-  handleDetailChangeName = (name) => {
-    this.setState({
-      lesson: {
-        ...this.state.lesson,
-        lesson_name: name
-      }
-    })
-  }
-
-  handleDetailChangeType = (type) => {
-    this.setState({
-      lesson: {
-        ...this.state.lesson,
-        lesson_type: type
-      }
-    })
-  }
-
-  handleDetailChangeValue = (value) => {
-    this.setState({
-      lesson: {
-        ...this.state.lesson,
-        lesson_value: value
-      }
-    })
-  }
-
-  handleRemoveQuestion = (id) => {
-    let remains = this.state.data.filter(q => {
-      if(q.id != id){ return q }
-    })
+  handleRemoveQuestion = () => {
     this.setState({
       ...this.state,
-      data: remains
+      lItem: 0
     })
   }
 
-  render() {
+  handleLessonDetail = (e) => {
+    e.preventDefault();
+
+    let lessonForm = e.target;
+    let lessonFormE = (e) => lessonForm.elements[e].value;
+
+    let lesson_type = (lessonFormE('lessonType') === 1)
+      ? 'Test'
+      : 'Lecture'
+    ;
+
+    this.setState({
+      lesson_type: lesson_type,
+      lesson_name: lessonFormE('lessonName'),
+      lesson_value: lessonFormE('lessonValue'),
+      step: 2
+    })
+  }
+
+  handleSubmitLesson = () => {
+    let lesson = {
+      lesson_type: this.state.lesson_type,
+      lesson_name: this.state.lesson_name,
+      lesson_value: this.state.lesson_value,
+      questions: this.state.data,
+      topic_id: this.props.topic_id
+    }
+    console.log(lesson)
+  }
+
+  lessonQuestionsForm = () => {
     return (
       <div>
         <h2>This is the question creation main page</h2>
-        <QuestionCreationLessonDetails onDetailChangeName={this.handleDetailChangeName}
-          onDetailChangeType={this.handleDetailChangeType}
-          onDetailChangeValue={this.handleDetailChangeValue}/>
-        <QuestionToAdd qsToAdd={this.state.data} remove={this.handleRemoveQuestion.bind(this)} />
-        <LessonSubmitComponent />
-        <QuestionTypeAdder onAddClick={this.handleAddQuestionType} lastItem={this.state.lItem} />
-        <div>
-          Name: {this.state.lesson.lesson_name}  Type: {this.state.lesson.lesson_type}
-        </div>
+        <LessonDetails lessonDetails={this.state} />
+        <QuestionToAdd qsToAdd={this.state.lItem} remove={this.handleRemoveQuestion.bind(this)}
+         addQ={this.handleAddQ} />
+        <LessonSubmitComponent onSubmit={this.handleSubmitLesson} />
+        <QuestionTypeAdder onAddClick={this.handleAddQuestionType} currentStat={this.state.lItem} remove={this.handleRemoveQuestion} />
+      </div>
+    )
+  }
+
+  render() {
+    let toView = () => {
+      return (this.state.step === 1)
+      ? <QuestionCreationLessonDetails submitLessonDetail={this.handleLessonDetail} />
+      : this.lessonQuestionsForm()
+    }
+
+    return (
+      <div>
+        {toView()}
       </div>
     )
   }

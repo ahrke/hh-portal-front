@@ -1,0 +1,9 @@
+.lessonQs {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.selected {
+  background-color: #00b894 !important;
+  padding: 15px;
+}

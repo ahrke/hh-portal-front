@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collapsible, CollapsibleItem, Button } from 'react-materialize';
+import { Collapsible, CollapsibleItem, Button, Row } from 'react-materialize';
 import './SideNav.css';
 
 class SideNav extends React.Component {
@@ -39,7 +39,7 @@ class SideNav extends React.Component {
 
     return (
         <CollapsibleItem key={course.course_id} header={course.course_name} className="collapsible z-depth-1">
-          <Collapsible accordion className="blue grey-text text-lighten-3 popout">
+          <Collapsible accordion className="blue lighten-1 grey-text text-lighten-3">
               {subs}
           </Collapsible>
         </CollapsibleItem>
@@ -53,8 +53,8 @@ class SideNav extends React.Component {
 
     return (
 
-        <CollapsibleItem key={header} header={header} className="collapsible z-depth-1">
-          <Collapsible accordion className="blue grey-text text-lighten-3 popout">
+        <CollapsibleItem key={header} header={header} className="collapsible">
+          <Collapsible accordion className="grey-text text-lighten-3 blue lighten-1">
               {subs}
           </Collapsible>
         </CollapsibleItem>
@@ -64,12 +64,10 @@ class SideNav extends React.Component {
   courseTools = () => {
     if(this.props.user.role == 1){
       return (
-        this.CollapsibleBuilder(
-          'Course Tools',
-          [{name:'Create Course',message:'New Course',view:'createCourse'},
-          {name:'Lesson Tools',message:'New Lesson',view:'createLesson'},
-          {name:'Students View', message:'View Student Grades',view:'myStudentsView'}]
-        )
+        <CollapsibleItem header='Course Tools' className="collapsible">
+          <CollapsibleItem className='blue grey-text text-lighten-3' header='View Student List'
+          onClick={() => this.props.changeWorkAreaView(`myStudentsView`)} />
+        </CollapsibleItem>
       )
     } else if(this.props.user.role == 2) {
       return (
@@ -80,10 +78,56 @@ class SideNav extends React.Component {
     }
   }
 
+  createTools = (changeWorkAreaView) => {
+    return (
+      <CollapsibleItem header='Create New...' className="collapsible">
+        <CollapsibleItem className='blue grey-text text-lighten-3' header='Course' onClick={() => changeWorkAreaView(`createCourse`)}>Course</CollapsibleItem>
+        <Collapsible accordion className="blue grey-text text-lighten-3">
+          <CollapsibleItem header='Topic'>
+            {(this.props.user.courses)
+              ? (this.props.user.courses.map((course,i) =>
+                <li key={course.course_id} className='buttCollapse' onClick={() => {
+                  console.log("course_id is...",course.course_id)
+                  this.props.changeCurrentCourse(course.course_id)
+                  changeWorkAreaView(`createTopic`);
+                }}>
+                  {course.course_name}
+                </li>))
+              : <span className='blue-text' > No Courses! You need to create one </span>
+            }
+          </CollapsibleItem>
+          <CollapsibleItem header='Lesson/Test'>
+            {(this.props.user.courses) ? (
+              <Collapsible accordion className="blue lighten-2 grey-text text-lighten-3">
+              {this.props.user.courses.map((course,i) =>
+                <CollapsibleItem header={course.course_name} onClick={() => {
+                  console.log("course_id is...",course.course_id)
+                  this.props.changeCurrentCourse(course.course_id)
+                }}>
+                  {(course.topics) ? (
+                    course.topics.map((topic,i) =>
+                      <li key={topic.topic_id} className='blue-text' onClick={() => {
+                        console.log("topic_id is...",topic.topic_id)
+                        this.props.changeCurrentTopic(topic.topic_id)
+                        changeWorkAreaView(`createLesson`);
+                      }}>
+                        {topic.topic_name}
+                      </li>
+                    )
+                  ) : <span className='blue-text' > No Topics! You need to create one </span>
+                  }
+                </CollapsibleItem>
+              )}
+              </Collapsible>
+            ) : <span className='blue-text' > No Courses! You need to create one </span>
+          }
+          </CollapsibleItem>
+        </Collapsible>
+      </CollapsibleItem>
+    )
+  }
+
   render() {
-
-
-
     return (
       <div className="side-nav fixed blue-text" id='side-nav-custom'>
         <Collapsible accordion>
@@ -95,6 +139,7 @@ class SideNav extends React.Component {
           {name:'Lesson 2',message:'salarys man',view:'lessonView'},
           {name:'Lesson 3',message:'whoa whoa',view:'gen'}])}
         {this.courseTools()}
+        {this.createTools(this.props.changeWorkAreaView)}
       </Collapsible>
       </div>
     )

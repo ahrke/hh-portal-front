@@ -17,7 +17,7 @@ class Landing extends React.Component {
     })
   }
 
-  onButtonClick = ({ onSignInButtonClick }) => {
+  onButtonClick = () => {
     //const hash = bcrypt.hashSync(this.refs.password.value, 10);
       //console.log("password from landing page sign in is....", hash);
       this.props.onSignInButtonClick(this.refs.login_id.value, this.refs.password.value);

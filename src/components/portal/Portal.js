@@ -30,7 +30,9 @@ class Portal extends React.Component {
         role: ''
       },
       workAreaView: '',
-      currentLesson: ''
+      currentLesson: '',
+      currentTopic: '',
+      currentCourse: ''
     }
   }
 
@@ -53,6 +55,18 @@ class Portal extends React.Component {
     })
   }
 
+  handleCourseChange = (id) => {
+    this.setState({
+      currentCourse: id
+    })
+  }
+
+  handleTopicChange = (id) => {
+    this.setState({
+      currentTopic: id
+    })
+  }
+
   handleCurrentLesson = (lesson) => {
     console.log("lesson in Portal is...",lesson);
     this.setState({
@@ -71,8 +85,17 @@ class Portal extends React.Component {
     return (
       <div>
         <NavBar />
-        <SideNav changeWorkAreaView={this.handleWorkAreaView} user={this.props.user} changeLesson={this.handleCurrentLesson} />
-        <WorkArea style={{height:"100%"}} simpleMessage="hello stranger" user={this.props.user} newView={this.state.workAreaView} currentLesson={this.state.currentLesson} />
+        <SideNav changeWorkAreaView={this.handleWorkAreaView} user={this.props.user}
+          changeLesson={this.handleCurrentLesson}
+          changeCurrentCourse={this.handleCourseChange}
+          changeCurrentTopic={this.handleTopicChange}
+        />
+        <WorkArea style={{height:"100%"}} simpleMessage="hello stranger" user={this.props.user}
+          newView={this.state.workAreaView}
+          currentLesson={this.state.currentLesson}
+          currentCourse={this.state.currentCourse}
+          currentTopic={this.state.currentTopic}
+        />
       </div>
     )
   }

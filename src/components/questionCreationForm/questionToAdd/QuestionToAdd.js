@@ -2,25 +2,22 @@ import React from 'react';
 import MC from './mc';
 import LA from './la';
 
-const QuestionToAdd = ({qsToAdd, remove}) => {
-  console.log("currently, qsToAdd from QuestionToAdd is...",qsToAdd)
+const QuestionToAdd = ({qsToAdd, remove, addQ}) => {
 
-  const nodeHere = qsToAdd.map(q => {
-    console.log("q is currently...",q)
-    if(q.type=='MC'){
-      return (<li><MC remove={remove} id={q.id} /></li>);
-    } else if(q.type=='LA'){
-      return (<li><LA remove={remove} id={q.id} /></li>);
+  const nodeHere = () => {
+    if(qsToAdd==1){
+      return (<MC remove={remove} addQ={addQ} />);
+    } else if(qsToAdd==2){
+      return (<LA remove={remove} addQ={addQ} />);
+    } else {
+      return
     }
-  })
-
-
-      console.log("nodeHere is...",nodeHere)
+  }
 
   return (
-    <ul>
-      {nodeHere}
-    </ul>
+    <div>
+      {nodeHere()}
+    </div>
   )
 }
 

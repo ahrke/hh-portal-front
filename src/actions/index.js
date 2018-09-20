@@ -21,3 +21,23 @@ export const updateGrade = (student_id,lesson_id,grade) => async dispatch => {
 
   //dispatch({ type: UPDATEGRADE, payload: res.data });
 }
+
+export const addCourse = (course) => async dispatch => {
+  const res = await axios.post('/addNewCourse', course);
+
+  console.log(res.data);
+
+}
+
+export const addTopic = (t) => async dispatch => {
+  const res = await axios.post('/addNewTopic', t);
+
+  console.log(res.data);
+
+}
+
+export const addQuestion = (q) => async dispatch => {
+  const res = await axios.post('/addNewTest', q)
+
+  console.log(res.data);
+}

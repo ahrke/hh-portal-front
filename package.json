@@ -8,6 +8,15 @@
     },
     "/updateGrade": {
       "target": "http://localhost:3000"
+    },
+    "/addNewCourse": {
+      "target": "http://localhost:3000"
+    },
+    "/addNewTopic": {
+      "target": "http://localhost:3000"
+    },
+    "/addNewTest": {
+      "target": "http://localhost:3000"
     }
   },
   "dependencies": {

@@ -7,3 +7,9 @@
 .collapsible {
   background-color: rgba(238,238,238,0.7);
 }
+
+.buttCollapse {
+  background-color: white !important;
+  color: #2196F3 !important;
+
+}

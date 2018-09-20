@@ -3,10 +3,10 @@ import { Button } from 'react-materialize';
 
 import './LessonSubmitComponent.css';
 
-const LessonSubmitComponent = () => {
+const LessonSubmitComponent = ({onSubmit}) => {
   return (
     <div>
-      <Button s={12} large className='buttStyle'>Create Lesson</Button>
+      <Button s={12} large className='buttStyle' onClick={() => onSubmit()}>Create Lesson</Button>
     </div>
   )
 }

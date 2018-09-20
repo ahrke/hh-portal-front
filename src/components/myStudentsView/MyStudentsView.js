@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './MyStudentsView.css';
+
 class MyStudentsView extends React.Component {
 
 
@@ -62,9 +64,9 @@ class MyStudentsView extends React.Component {
       <div>
         {courses.map(course => {
           return (
-            <div>
+            <div className="courseBox">
               <h2>{course.course_name}</h2>
-              <table>
+              <table className="bordered">
                 <tbody>
                 {this.studentsTableHeader(course.lessons)}
                 {course.students.map(student => this.myStudentsRow(student, course.lessons))}
